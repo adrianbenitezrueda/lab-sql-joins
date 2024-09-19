@@ -55,7 +55,7 @@ LIMIT 10;
 -- 7/ Determine if "Academy Dinosaur" can be rented from Store 1
 SELECT CASE
 	WHEN count(sinv.inventory_id) > 0 THEN "Yes"
-    ELSE "NO"
+    ELSE "No"
 END AS "Is available Academy Dinosaur?"
 FROM sakila.inventory AS sinv
 JOIN sakila.film AS sfi ON sinv.film_id = sfi.film_id
