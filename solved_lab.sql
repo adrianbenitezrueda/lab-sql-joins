@@ -59,5 +59,16 @@ SELECT CASE
 END AS "Is available Academy Dinosaur?"
 FROM sakila.inventory AS sinv
 JOIN sakila.film AS sfi ON sinv.film_id = sfi.film_id
-WHERE sfi.title = "Academy Dinosaur" AND sinv.store_id = 1;
+WHERE sfi.title = 'Academy Dinosaur' AND sinv.store_id = 1;
 
+-- 8/ Provide a list of all distinct film titles, along with their availability status in the inventory.
+-- Include a column indicating whether each title is 'Available' or 'NOT available.'
+-- Note that there are 42 titles that are not in the inventory, and this information can be obtained using a CASE statement combined with IFNULL."
+SELECT sfi.title, COUNT(sinv.inventory_id),
+	CASE
+		WHEN COUNT(sinv.inventory_id) > 0 THEN 'Available'
+        ELSE 'Not Available'
+	END AS availability
+FROM sakila.film AS sfi
+LEFT JOIN sakila.inventory AS sinv ON sfi.film_id = sinv.film_id
+GROUP BY sfi.title;
